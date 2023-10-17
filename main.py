@@ -19,7 +19,7 @@ layout = [
     [sg.Input(key='input_file', disabled=True), sg.FileBrowse(key='browse_file')],
     [sg.Button('Вызвать ffprobe')],
     [sg.Text('Входящие дорожки: ')],
-    [sg.Multiline(key='result', size=(None, 10), disabled=True)],
+    [sg.Multiline(key='result', size=(45, 10), disabled=True)],
     [sg.Text('Добавить аудио дорожки'), sg.Checkbox('', key='add_audio')],
     [sg.Text('Введите количество аудиодорожек для выбора: ')],
     [sg.Input(key='audio_tracks_count')],
@@ -82,7 +82,8 @@ while True:
 
         command = (f"{ffmpeg_path} -y -i \"{input_file}\""
                    f" {video_tracks}{audio_tracks}{subtitles_tracks} {params} \"{output_path}\"")
-        subprocess.call(command, shell=True)
+        #subprocess.call(command, shell=True)
+        subprocess.check_output(command, shell=True, encoding='utf-8')
         file_path = os.path.abspath(output_path)
         sg.popup('FFmpeg выполнен успешно!')#, auto_close=True, auto_close_duration=2)
         subprocess.call(f'explorer /select,"{file_path}"', shell=True)
