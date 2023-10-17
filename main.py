@@ -2,6 +2,7 @@ import io
 import os
 import subprocess
 import sys
+import platform
 import PySimpleGUI as sg
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
@@ -74,7 +75,8 @@ while True:
         params = "-c:v copy -c:a copy -c:s mov_text -f mp4"
         window['output_path'].update(output_path)
 
-        start = sg.popup('Запускаем ffmpeg? \nЭто займет немного времени'
+        start = sg.popup('Запускаем ffmpeg? \n'
+                         'Это займет немного времени'
                          , button_type=sg.POPUP_BUTTONS_YES_NO)
         if input_file == "":
             sg.popup('Не указан исходный файл!')
@@ -85,10 +87,17 @@ while True:
             continue
 
         command = (f"{ffmpeg_path} -y -i \"{input_file}\""
-                   f" {video_tracks}{audio_tracks}{subtitles_tracks} {params} \"{output_path}\"")
+                   f" {video_tracks}{audio_tracks}{subtitles_tracks}"
+                   f" {params} \"{output_path}\"")
         subprocess.call(command, shell=True)
         file_path = os.path.abspath(output_path)
         sg.popup('FFmpeg выполнен успешно!')#, auto_close=True, auto_close_duration=2)
-        subprocess.call(f'explorer /select,"{file_path}"', shell=True)
+        #subprocess.call(f'explorer /select,"{file_path}"', shell=True)
+        if platform.system() == "Windows":
+            subprocess.call(f'explorer /select,"{file_path}"', shell=True)
+        if platform.system() == "Linux":
+            subprocess.call(["xdg-open", file_path])
+        else:
+            print("Операционная система не поддерживается.")
 
 window.close()
