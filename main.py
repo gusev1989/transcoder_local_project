@@ -82,8 +82,7 @@ while True:
 
         command = (f"{ffmpeg_path} -y -i \"{input_file}\""
                    f" {video_tracks}{audio_tracks}{subtitles_tracks} {params} \"{output_path}\"")
-        #subprocess.call(command, shell=True)
-        subprocess.check_output(command, shell=True, encoding='utf-8')
+        subprocess.call(command, shell=True)
         file_path = os.path.abspath(output_path)
         sg.popup('FFmpeg выполнен успешно!')#, auto_close=True, auto_close_duration=2)
         subprocess.call(f'explorer /select,"{file_path}"', shell=True)
