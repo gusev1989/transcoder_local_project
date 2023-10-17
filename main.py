@@ -17,7 +17,7 @@ with open(settings_file_path, "r") as settings_file:
 layout = [
     [sg.Text('Путь к файлу: ')],
     [sg.Input(key='input_file', disabled=True), sg.FileBrowse(key='browse_file')],
-    [sg.Button('Вызвать ffprobe для input_file')],
+    [sg.Button('Вызвать ffprobe')],
     [sg.Text('Входящие дорожки: ')],
     [sg.Multiline(key='result', size=(None, 10), disabled=True)],
     [sg.Text('Добавить аудио дорожки'), sg.Checkbox('', key='add_audio')],
@@ -28,7 +28,7 @@ layout = [
     [sg.Input(key='subtitles_tracks_count')],
     [sg.Text('Результат: ')],
     [sg.Text(key='output_path')],#, disabled=True)],
-    [sg.Button('Запустить')]
+    [sg.Button('Запустить кодирование')]
 ]
 
 window = sg.Window('FFmpeg Converter', layout)
