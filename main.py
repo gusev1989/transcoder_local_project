@@ -56,19 +56,30 @@ while True:
 
         audio_tracks = ""
         subtitles_tracks = ""
-
+        audio_cache = []
         if add_audio:
             for i in range(int(audio_tracks_count)):
                 audio_track = sg.popup_get_text(f"Введите номер {i + 1}-й аудиодорожки:")
-                if audio_track is None or audio_track == "":
+                if (audio_track is None
+                        or audio_track == ""
+                        or audio_track in audio_cache):
+                    sg.popup("Такой номер дорожки уже был,"
+                             "или дорожка не указана ")
                     break
                 audio_tracks += f" -map 0:{audio_track}"
+                audio_cache.append(audio_track)
+        subtitles_cache = []
         if add_subtitles:
             for i in range(int(subtitles_tracks_count)):
                 subtitles_track = sg.popup_get_text(f"Введите номер {i + 1}-й дорожки субтитров:")
-                if subtitles_track is None or subtitles_track == "":
+                if (subtitles_track is None
+                        or subtitles_track == ""
+                        or subtitles_track in subtitles_cache):
+                    sg.popup("Такой номер дорожки уже был,"
+                             "или дорожка не указана ")
                     break
                 subtitles_tracks += f" -map 0:{subtitles_track}"
+                subtitles_cache.append(subtitles_track)
 
         output_path = f"{input_file}_result.mp4"
         video_tracks = "-map 0:v"
