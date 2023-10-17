@@ -69,6 +69,7 @@ while True:
                 audio_tracks += f" -map 0:{audio_track}"
                 audio_cache.append(audio_track)
         subtitles_cache = []
+
         if add_subtitles:
             for i in range(int(subtitles_tracks_count)):
                 subtitles_track = sg.popup_get_text(f"Введите номер {i + 1}-й дорожки субтитров:")
