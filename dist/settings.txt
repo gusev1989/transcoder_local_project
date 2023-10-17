@@ -1,0 +1,2 @@
+D:\\ffmpeg\\bin\\ffmpeg
+D:\\ffmpeg\\bin\\ffprobe
