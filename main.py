@@ -27,7 +27,7 @@ layout = [
     [sg.Text('Введите количество дорожек субтитров: ')],
     [sg.Input(key='subtitles_tracks_count')],
     [sg.Text('Результат: ')],
-    [sg.Text(key='output_path')],#, disabled=True)],
+    [sg.Text(key='output_path')],
     [sg.Button('Запустить кодирование')]
 ]
 
@@ -39,14 +39,14 @@ while True:
     if event == sg.WINDOW_CLOSED:
         break
 
-    if event == 'Вызвать ffprobe для input_file':
+    if event == 'Вызвать ffprobe':
         input_file = values['input_file']
-        command = (f"{ffprobe_path} -v quiet -show_entries stream=index"
-                   f",codec_type:stream_tags=title -of csv=p=0 \"{input_file}\"")
+        command = (f"{ffprobe_path} -v quiet -show_entries stream=index,"
+                   f"codec_type,codec_name:stream_tags=title -of csv=p=0 \"{input_file}\"")
         result = subprocess.check_output(command, shell=True, encoding='utf-8')
         window['result'].update(result)
 
-    if event == 'Запустить':
+    if event == 'Запустить кодирование':
         input_file = values['input_file']
         audio_tracks_count = values['audio_tracks_count']
         add_subtitles = values['add_subtitles']
@@ -80,7 +80,8 @@ while True:
         else:
             continue
 
-        command = f"{ffmpeg_path} -y -i \"{input_file}\" {video_tracks}{audio_tracks}{subtitles_tracks} {params} \"{output_path}\""
+        command = (f"{ffmpeg_path} -y -i \"{input_file}\""
+                   f" {video_tracks}{audio_tracks}{subtitles_tracks} {params} \"{output_path}\"")
         subprocess.call(command, shell=True)
         file_path = os.path.abspath(output_path)
         sg.popup('FFmpeg выполнен успешно!')#, auto_close=True, auto_close_duration=2)
