@@ -74,7 +74,11 @@ while True:
         params = "-c:v copy -c:a copy -c:s mov_text -f mp4"
         window['output_path'].update(output_path)
 
-        start = sg.popup('Запускаем ffmpeg? \nЭто займет немного времени', button_type=sg.POPUP_BUTTONS_YES_NO)
+        start = sg.popup('Запускаем ffmpeg? \nЭто займет немного времени'
+                         , button_type=sg.POPUP_BUTTONS_YES_NO)
+        if input_file == "":
+            sg.popup('Не указан исходный файл!')
+            continue
         if start == 'Yes':
             pass
         else:
