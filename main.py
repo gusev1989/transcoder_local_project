@@ -42,8 +42,8 @@ while True:
 
     if event == 'Вызвать ffprobe':
         input_file = values['input_file']
-        command = (f"{ffprobe_path} -v quiet -show_entries stream=index,"
-                   f"codec_type,codec_name:stream_tags=title -of csv=p=0 \"{input_file}\"")
+        command = (f"{ffprobe_path} -v quiet -show_entries stream=index,language"
+                   f"codec_type,codec_name:stream_tags=title,language -of csv=p=0 \"{input_file}\"")
         result = subprocess.check_output(command, shell=True, encoding='utf-8')
         window['result'].update(result)
 
