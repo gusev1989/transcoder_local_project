@@ -1,2 +1,2 @@
-D:\\ffmpeg\\bin\\ffmpeg
+D:\\ffmpeg\\b in\\ffmpeg
 D:\\ffmpeg\\bin\\ffprobe
