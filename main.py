@@ -68,8 +68,8 @@ while True:
                     break
                 audio_tracks += f" -map 0:{audio_track}"
                 audio_cache.append(audio_track)
-        subtitles_cache = []
 
+        subtitles_cache = []
         if add_subtitles:
             for i in range(int(subtitles_tracks_count)):
                 subtitles_track = sg.popup_get_text(f"Введите номер {i + 1}-й дорожки субтитров:")
@@ -84,7 +84,7 @@ while True:
 
         output_path = f"{input_file}_result.mp4"
         video_tracks = "-map 0:v"
-        params = "-c:v copy -c:a copy -c:s mov_text -f mp4"
+        params = "-c:v copy -c:a aac -c:s mov_text -f mp4"
         window['output_path'].update(output_path)
 
         start = sg.popup('Запускаем ffmpeg? \n'
