@@ -84,7 +84,7 @@ while True:
 
         output_path = f"{input_file}_result.mp4"
         video_tracks = "-map 0:v"
-        params = "-c:v copy -c:a aac -c:s mov_text -f mp4"
+        params = "-c:v copy -c:a aac -c:s mov_text -strict -0 -f mp4"
         window['output_path'].update(output_path)
 
         start = sg.popup('Запускаем ffmpeg? \n'
